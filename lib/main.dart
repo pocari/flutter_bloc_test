@@ -41,6 +41,15 @@ class CounterScreen extends StatelessWidget {
                 counterBloc.dispatch(CounterEvent.increment);
               },
             ),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 5.0),
+            child: FloatingActionButton(
+              child: Icon(Icons.remove),
+              onPressed: () {
+                counterBloc.dispatch(CounterEvent.decrement);
+              },
+            ),
           )
         ],
       ),
@@ -48,7 +57,7 @@ class CounterScreen extends StatelessWidget {
   }
 }
 
-enum CounterEvent { increment }
+enum CounterEvent { increment, decrement }
 
 class CounterBloc extends Bloc<CounterEvent, int> {
   @override
@@ -58,6 +67,9 @@ class CounterBloc extends Bloc<CounterEvent, int> {
     switch (event) {
       case CounterEvent.increment:
         yield currentState + 1;
+        break;
+      case CounterEvent.decrement:
+        yield currentState - 1;
         break;
     }
   }
